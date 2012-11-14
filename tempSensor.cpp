@@ -2,7 +2,7 @@
  * tempSensor.cpp
  *
  *  Created on: Nov 7, 2012
- *      Author: christoph
+ *      Author: tuxmux28 
  */
 
 #include "tempSensor.h"
@@ -11,11 +11,15 @@ using namespace std;
 
 
 tempSensor::tempSensor() {
-	sensId = "";
+	this->sensId = "";
+	this->retTemp = 0.0;
+	this->lastTemp = 0.0;
 }
 
 tempSensor::tempSensor(string id) {
 	this->setId(id);
+	this->lastTemp = 0.0;
+	this->retTemp = 0.0;
 }
 
 void tempSensor::setId(string id) {
@@ -28,11 +32,11 @@ float tempSensor::getTemp() {
 		strcat(path,this->sensId.c_str());
 		strcat(path,"/w1_slave");
 
+		this->lastTemp = this->retTemp;
 		ifstream fp;
 		char line[60];
 		char *tmpstring;
 		int temp = 0;
-		float retTemp = 0;
 
 		fp.open(path,ios::in);
 		assert(!fp.fail());
@@ -46,13 +50,14 @@ float tempSensor::getTemp() {
 
 		temp = atoi(tmpstring);
 
-		retTemp = temp / 1000.000;
-
-		if ( retTemp < -30 || retTemp > 100 ) {
-			retTemp = 0;
+		if ( temp < -18812 || temp > 100000 || temp == -62 ) {
+			this->retTemp = this->lastTemp;
+		}
+		else {
+			this->retTemp = temp / 1000.000;
 		}
 
-		return retTemp;
+		return this->retTemp;
 }
 
 tempSensor::~tempSensor() {

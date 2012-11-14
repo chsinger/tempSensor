@@ -17,6 +17,8 @@ using namespace std;
 class tempSensor {
 private:
 	string sensId;
+	float lastTemp;
+	float retTemp;
 public:
 	tempSensor();
 	tempSensor(string sensId);
