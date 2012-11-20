@@ -25,5 +25,6 @@ public:
 	virtual ~tempSensor();
 	void setId(string sensId);
 	float getTemp();
+	float getLastTemp();
 };
 

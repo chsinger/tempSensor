@@ -60,6 +60,10 @@ float tempSensor::getTemp() {
 		return this->retTemp;
 }
 
+float tempSensor::getLastTemp() {
+	return this->lastTemp;
+}
+
 tempSensor::~tempSensor() {
 }
 
