@@ -26,5 +26,6 @@ public:
 	void setId(string sensId);
 	float getTemp();
 	float getLastTemp();
+	void setLastTemp(float lastTempVal);
 };
 

@@ -64,6 +64,10 @@ float tempSensor::getLastTemp() {
 	return this->lastTemp;
 }
 
+void tempSensor::setLastTemp(float lastTempVal) {
+	this->lastTemp = lastTempVal;
+}
+
 tempSensor::~tempSensor() {
 }
 
