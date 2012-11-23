@@ -50,7 +50,7 @@ float tempSensor::getTemp() {
 
 		temp = atoi(tmpstring);
 
-		if ( temp < -18812 || temp > 100000 || temp == -62 ) {
+		if ( temp < -18812 || temp > 100000 || temp == -62 || temp == -125 ) {
 			this->retTemp = this->lastTemp;
 		}
 		else {
