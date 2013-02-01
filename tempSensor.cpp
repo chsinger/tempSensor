@@ -36,6 +36,7 @@ float tempSensor::getTemp() {
 		ifstream fp;
 		char line[60];
 		char *tmpstring;
+		int findYes = 0;
 		int temp = 0;
 
 		fp.open(path,ios::in);
@@ -43,17 +44,18 @@ float tempSensor::getTemp() {
 
 		while (!fp.eof()) {
 			fp >> line;
+			if (strstr(line, "YES")) findYes++;
 		}
 
-		tmpstring = strtok(line, "=");
-		tmpstring = strtok(NULL, "=");
-
-		temp = atoi(tmpstring);
-
-		if ( temp < -18812 || temp > 100000 || temp == -62 || temp == -125 ) {
+		if  (findYes == 0) { 
 			this->retTemp = this->lastTemp;
 		}
 		else {
+			tmpstring = strtok(line, "=");
+			tmpstring = strtok(NULL, "=");
+
+			temp = atoi(tmpstring);
+
 			this->retTemp = temp / 1000.000;
 		}
 
